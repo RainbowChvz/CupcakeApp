@@ -70,13 +70,13 @@ class SummaryFragment : Fragment() {
             sharedViewModel.price.value.toString()
         )
 
-        val i = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
-            putExtra(Intent.EXTRA_TEXT, orderSummary)
-        }
+        val i = Intent(Intent.ACTION_SEND)
+            .setType("text/plain")
+            .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
+            .putExtra(Intent.EXTRA_TEXT, orderSummary)
 
-        if (i.resolveActivity(activity?.packageManager!!) != null)
+
+        if (activity?.packageManager?.resolveActivity(i, 0) != null)
             startActivity(i)
     }
 
